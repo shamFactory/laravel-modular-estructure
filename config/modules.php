@@ -29,7 +29,6 @@ return [
             'start' => 'start.php',
             //'routes' => 'Http/routes.php',
             'views/index' => 'Resources/views/web/index.blade.php',
-            'views/index' => 'Resources/views/admin/index.blade.php',
             'views/master' => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
