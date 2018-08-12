@@ -1,5 +1,3 @@
 <?php
 
-Route::middleware('auth:api')->get('/', function () {
-    return ['$LOWER_NAME$' => ''];
-});
+Route::get('/', 'IndexController@index');

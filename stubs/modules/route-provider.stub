@@ -1,11 +1,11 @@
 <?php
 
-namespace $NAMESPACE$;
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Providers;
 
-use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class $CLASS$ extends ServiceProvider
+class RouteServiceProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to your controller routes.
@@ -14,7 +14,7 @@ class $CLASS$ extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = '$MODULE_NAMESPACE$\$MODULE$\Http\Controllers';
+    protected $namespace = '$MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -52,12 +52,12 @@ class $CLASS$ extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
+             ->namespace('$MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\Web')
              ->group(base_path('$MODULE_NAMESPACE$/$LOWER_NAME$/Routes/web.php'));
     }
 
     /**
-     * Define the "web" routes for the application.
+     * Define the "admin" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
      *
@@ -67,8 +67,8 @@ class $CLASS$ extends ServiceProvider
     {
         Route::prefix('admin/$LOWER_NAME$')
              ->middleware('auth')
-             ->namespace($this->namespace)
-             ->group(base_path('$MODULE_NAMESPACE$/$LOWER_NAME$/Routes/web.php'));
+             ->namespace('$MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\Admin')
+             ->group(base_path('$MODULE_NAMESPACE$/$LOWER_NAME$/Routes/admin.php'));
     }
 
     /**
@@ -82,7 +82,7 @@ class $CLASS$ extends ServiceProvider
     {
         Route::prefix('api/$LOWER_NAME$')
              ->middleware('auth:api')
-             ->namespace($this->namespace)
+             ->namespace('$MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\Api')
              ->group(base_path('$MODULE_NAMESPACE$/$LOWER_NAME$/Routes/api.php'));
     }
 }
