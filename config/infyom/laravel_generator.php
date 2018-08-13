@@ -1,5 +1,11 @@
 <?php
 
+$prefix = 'admin';
+$moduleName = 'Prueba';
+
+$module = (empty($moduleName) ? '' : 'Modules/'.$moduleName.'/');
+$moduleNamespace = (empty($moduleName) ? 'App' : 'Modules\\'.$moduleName);
+
 return [
 
     /*
@@ -11,25 +17,25 @@ return [
 
     'path' => [
 
-        'migration'         => base_path('database/migrations/'),
+        'migration'         => base_path($module.'database/migrations/'),
 
-        'model'             => app_path('Models/'),
+        'model'             => base_path($module.'Models/'),
 
         'datatables'        => app_path('DataTables/'),
 
-        'repository'        => app_path('Repositories/'),
+        'repository'        => base_path($module.'Repositories/'),
 
-        'routes'            => base_path('routes/web.php'),
+        'routes'            => base_path($module.'routes/'.(empty($prefix) ? 'web' : strtolower($prefix)).'.php'),
 
-        'api_routes'        => base_path('routes/api.php'),
+        'api_routes'        => base_path($module.'routes/api.php'),
 
-        'request'           => app_path('Http/Requests/'),
+        'request'           => base_path($module.'Http/Requests/'),
 
-        'api_request'       => app_path('Http/Requests/API/'),
+        'api_request'       => base_path($module.'Http/Requests/Api/'),
 
-        'controller'        => app_path('Http/Controllers/'),
+        'controller'        => base_path($module.'Http/Controllers/'.(empty($prefix) ? '' : ucfirst($prefix).'/') ),
 
-        'api_controller'    => app_path('Http/Controllers/API/'),
+        'api_controller'    => base_path($module.'Http/Controllers/Api/'),
 
         'test_trait'        => base_path('tests/traits/'),
 
@@ -37,11 +43,11 @@ return [
 
         'api_test'          => base_path('tests/'),
 
-        'views'             => base_path('resources/views/'),
+        'views'             => base_path($module.'resources/views/'),
 
-        'schema_files'      => base_path('resources/model_schemas/'),
+        'schema_files'      => base_path($module.'resources/schemas/'),
 
-        'templates_dir'     => base_path('resources/infyom/infyom-generator-templates/'),
+        'templates_dir'     => base_path('resources/stubs/infyom-generator-templates/'),
 
         'modelJs'           => base_path('resources/assets/js/models/'),
     ],
@@ -55,19 +61,19 @@ return [
 
     'namespace' => [
 
-        'model'             => 'App\Models',
+        'model'             => $moduleNamespace.'\Models', //'App\Models',
 
-        'datatables'        => 'App\DataTables',
+        'datatables'        => $moduleNamespace.'\DataTables', //'App\DataTables',
 
-        'repository'        => 'App\Repositories',
+        'repository'        => $moduleNamespace.'\Repositories', //'App\Repositories',
 
-        'controller'        => 'App\Http\Controllers',
+        'controller'        => $moduleNamespace.'\Http\Controllers'.(empty($prefix) ? '' : '\\'.ucfirst($prefix)), //'App\Http\Controllers',
 
-        'api_controller'    => 'App\Http\Controllers\Api',
+        'api_controller'    => $moduleNamespace.'\Http\Controllers\Api', //'App\Http\Controllers\Api',
 
-        'request'           => 'App\Http\Requests',
+        'request'           => $moduleNamespace.'\Http\Requests', //'App\Http\Requests',
 
-        'api_request'       => 'App\Http\Requests\API',
+        'api_request'       => $moduleNamespace.'\Http\Requests\Api', //'App\Http\Requests\API',
     ],
 
     /*
@@ -126,9 +132,9 @@ return [
 
         'path' => '',
 
-        'view' => '',  // using backend will create return view('backend.?.index') type the backend views directory
+        'view' => (empty($prefix) ? '' : strtolower($prefix)),  // using backend will create return view('backend.?.index') type the backend views directory
 
-        'public' => '',
+        'public' => (empty($moduleName) ? '' : $moduleName.'::'),
     ],
 
     /*
@@ -150,7 +156,7 @@ return [
 
             'enabled'       => true,
 
-            'menu_file'     => 'layouts/menu.blade.php',
+            'menu_file'     => (empty($moduleName) ? '' : '../../../../resources/views/').'layouts/admin/menu.blade.php',
         ],
     ],
 
